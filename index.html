@@ -1,0 +1,53 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Gradient Picker</title>
+  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #2c2f33;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    #preview {
+      margin-top: 1rem;
+      width: 300px;
+      height: 100px;
+      border-radius: 10px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Discord Gradient Picker</h1>
+  <p>Select two colors for your gradient.</p>
+
+  <div style="display: flex; justify-content: center; gap: 20px;">
+    <div><p>Start Color</p><div id="colorPicker1"></div></div>
+    <div><p>End Color</p><div id="colorPicker2"></div></div>
+  </div>
+
+  <div id="preview"></div>
+
+  <script>
+    const colorPicker1 = new iro.ColorPicker("#colorPicker1", { width: 150, color: "#7289da" });
+    const colorPicker2 = new iro.ColorPicker("#colorPicker2", { width: 150, color: "#99aab5" });
+
+    function updatePreview() {
+      const color1 = colorPicker1.color.hexString;
+      const color2 = colorPicker2.color.hexString;
+      document.getElementById("preview").style.background = `linear-gradient(90deg, ${color1}, ${color2})`;
+    }
+
+    colorPicker1.on("color:change", updatePreview);
+    colorPicker2.on("color:change", updatePreview);
+    updatePreview();
+  </script>
+</body>
+</html>
